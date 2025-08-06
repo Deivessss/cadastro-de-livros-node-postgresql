@@ -42,6 +42,23 @@ app.get("/livros", async (req, res) => {
     }
 })
 
+app.get("/livros/:id", async (req, res) => {
+    try{
+        const resultado = await database.query(
+            "SELECT * FROM livros WHERE id = $1",
+            [Number(req.params.id)]
+        )
+        if (resultado.rows.length === 0){
+            return res.status(404).json({erro: "ID não encontrado."})
+        } else {
+            return res.status(200).json({livro: resultado.rows[0]})
+        }
+    } catch (erro) {
+        console.error(erro)
+        return res.status(500).json({erro: "Erro interno do servidor."})
+    }
+})
+
 app.listen(3000, () => {
     console.log("Servidor ativado com sucesso: http://localhost:3000/")
 })
