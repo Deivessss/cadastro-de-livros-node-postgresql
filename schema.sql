@@ -1,0 +1,8 @@
+CREATE DATABASE livraria;
+
+CREATE TABLE IF NOT EXISTS livros (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(30) NOT NULL,
+    autor VARCHAR(30) NOT NULL,
+    editora VARCHAR(30) NOT NULL
+);
